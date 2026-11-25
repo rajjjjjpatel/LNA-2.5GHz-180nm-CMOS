@@ -6,6 +6,8 @@ A single-stage cascode LNA with inductive source degeneration, designed for a 2.
 **Tools:** Cadence Virtuoso, Spectre
 **Technology:** 180 nm CMOS, 1.8 V supply
 
+The full report, with the schematic and all simulation plots, is in [`report/RFIC_Design.pdf`](report/RFIC_Design.pdf).
+
 ---
 
 ## Results at 2.5 GHz
@@ -37,8 +39,6 @@ A cascode common-source stage with inductive source degeneration.
 
 **RF path:** PORT0 → C0 → Lg → gate of M1 → M0 (cascode) → Ld load → C1 → PORT1.
 **Bias:** M2 and R0 form a 1:25 current mirror that sets the bias current of M1. R1 and C2 isolate the RF gate from the bias circuit.
-
-![Schematic](schematic/lna_schematic.png)
 
 ### Final component values
 
@@ -106,29 +106,21 @@ Rref was raised from the hand value to 4.62 kΩ to reach Id = 7.0 mA, because ch
 
 ### S-parameters
 
-![S-parameters](results/s_params.png)
-
 S21 = 25.94 dB at 2.5 GHz (peak of 25.98 dB at 2.48 GHz). The S11 dip lies slightly low, at 2.46 GHz (−24.2 dB), and the S22 dip is at 2.49 GHz.
 
 ### Noise figure
 
-![Noise figure](results/nf.png)
+NF = 0.691 dB at 2.5 GHz, only 0.14 dB above the device minimum NFmin = 0.554 dB. NF stays below 1.2 dB over roughly 1.6 to 3.3 GHz.
 
 ### Stability
-
-![Stability](results/stability.png)
 
 Kf > 1 and B1f > 0 from 0.1 GHz up to 18.81 GHz, more than seven times the operating frequency. Above 18.8 GHz Kf falls below 1, because the inductors are modelled with a frequency-independent series resistance, which leaves the input network almost lossless near fT. Real inductors have loss that rises with frequency. A 100 Ω resistor in parallel with Ls would remove this with little effect at 2.5 GHz.
 
 ### Transient response
 
-![Transient](results/transient.png)
-
 With a 2.0 mV peak-to-peak input, the output is a clean 2.5 GHz sine of 39.14 mV peak-to-peak. The voltage gain is 19.6 V/V (25.8 dB), within 0.15 dB of S21.
 
 ### Gain compression
-
-![P1dB](results/p1db.png)
 
 Small-signal gain in the sweep is 26.0 dB. The input-referred 1-dB compression point is −30.26 dBm, with about −5.3 dBm at the output.
 
@@ -146,6 +138,7 @@ Small-signal gain in the sweep is 26.0 dB. The input-referred 1-dB compression p
 - Inductors are ideal models with a series resistance, not extracted layout or foundry inductor models.
 - Process and temperature corners have not been simulated.
 - Layout and a two-tone IIP3 simulation are not done yet.
+
 
 ## References
 
